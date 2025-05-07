@@ -11,10 +11,10 @@ def process_entry(entry):
 def main():
     file_name = "req.json"
     file_path = os.path.join(os.path.dirname(__file__), file_name)
-    aws_entries = get_aws_entries(file_path)
+    req_entries = get_aws_entries(file_path)
 
     # 各エントリを関数型プログラミングで処理
-    list(map(process_entry, aws_entries))
+    list(map(process_entry, req_entries))
 
 if __name__ == "__main__":
     main()
