@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>data module &#8212; aws-attach  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=2bf1fcf8" />
+    
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">aws-attach  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">data module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-data">
+<span id="data-module"></span><h1>data module<a class="headerlink" href="#module-data" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="data.DataLoader">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data.</span></span><span class="sig-name descname"><span class="pre">DataLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data.html#DataLoader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data.DataLoader" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>DataLoaderクラス
+JSONファイルからデータを読み込むクラス</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data.DataLoader.file_name">
+<span class="sig-name descname"><span class="pre">file_name</span></span><a class="headerlink" href="#data.DataLoader.file_name" title="Link to this definition">¶</a></dt>
+<dd><p>JSONファイルの名前</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data.DataLoader.load_data">
+<span class="sig-name descname"><span class="pre">load_data</span></span><a class="headerlink" href="#data.DataLoader.load_data" title="Link to this definition">¶</a></dt>
+<dd><p>読み込んだデータのリスト</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#data.req_data" title="data.req_data">req_data</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__init__(file_name</span></span></dt>
+<dd><p>str): DataLoaderの初期化</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">load_json(file_name</span></span></dt>
+<dd><p>str): JSONファイルからデータを読み込む</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="data.DataLoader.convert">
+<span class="sig-name descname"><span class="pre">convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data.html#DataLoader.convert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data.DataLoader.convert" title="Link to this definition">¶</a></dt>
+<dd><p>辞書のキーを特定の形式に変換する(ハイフンをアンダースコアに置換)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data.html#DataLoader.convert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition">¶</a></dt>
+<dd><p>辞書のキーを特定の形式に変換する
+辞書キーのハイフンをアンダースコアに置換する</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_item</strong> (<em>dict</em>) – 辞書データ</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>変換後の辞書データ</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>例:</dt><dd><p>{‘key-name’: ‘value’} -&gt; {‘key_name’: ‘value’}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="data.DataLoader.load_json">
+<span class="sig-name descname"><span class="pre">load_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data.html#DataLoader.load_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data.DataLoader.load_json" title="Link to this definition">¶</a></dt>
+<dd><p>JSONファイルからデータを読み込む</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<em>str</em>) – JSONファイルの名前</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>読み込んだデータのリスト</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#data.req_data" title="data.req_data">req_data</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="data.req_data">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data.</span></span><span class="sig-name descname"><span class="pre">req_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cloud</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vrf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dxgw_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dxgw_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vgw_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data.html#req_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data.req_data" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>リクエストデータを保持するクラス</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data.req_data.cloud">
+<span class="sig-name descname"><span class="pre">cloud</span></span><a class="headerlink" href="#data.req_data.cloud" title="Link to this definition">¶</a></dt>
+<dd><p>クラウドプロバイダ名</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data.req_data.vrf">
+<span class="sig-name descname"><span class="pre">vrf</span></span><a class="headerlink" href="#data.req_data.vrf" title="Link to this definition">¶</a></dt>
+<dd><p>VRF名</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data.req_data.date">
+<span class="sig-name descname"><span class="pre">date</span></span><a class="headerlink" href="#data.req_data.date" title="Link to this definition">¶</a></dt>
+<dd><p>日付</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data.req_data.account">
+<span class="sig-name descname"><span class="pre">account</span></span><a class="headerlink" href="#data.req_data.account" title="Link to this definition">¶</a></dt>
+<dd><p>アカウント名</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data.req_data.prefix">
+<span class="sig-name descname"><span class="pre">prefix</span></span><a class="headerlink" href="#data.req_data.prefix" title="Link to this definition">¶</a></dt>
+<dd><p>プレフィックスリスト</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data.req_data.dxgw_id">
+<span class="sig-name descname"><span class="pre">dxgw_id</span></span><a class="headerlink" href="#data.req_data.dxgw_id" title="Link to this definition">¶</a></dt>
+<dd><p>DXGW ID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data.req_data.dxgw_name">
+<span class="sig-name descname"><span class="pre">dxgw_name</span></span><a class="headerlink" href="#data.req_data.dxgw_name" title="Link to this definition">¶</a></dt>
+<dd><p>DXGW名</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data.req_data.vgw_id">
+<span class="sig-name descname"><span class="pre">vgw_id</span></span><a class="headerlink" href="#data.req_data.vgw_id" title="Link to this definition">¶</a></dt>
+<dd><p>VGW ID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">account</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#id1" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">cloud</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#id2" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">date</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#id3" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">dxgw_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#id4" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">dxgw_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#id5" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">prefix</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id6" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">vgw_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#id7" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">vrf</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#id8" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="data.request_list">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data.</span></span><span class="sig-name descname"><span class="pre">request_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">all_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#data.req_data" title="data.req_data"><span class="pre">req_data</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data.html#request_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data.request_list" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>リクエストデータのリストを保持するクラス
+.. attribute:: all_data</p>
+<blockquote>
+<div><p>リクエストデータのリスト</p>
+<dl class="field-list simple">
+<dt class="field-odd">type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[req_data]</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py method">
+<dt class="sig sig-object py" id="data.request_list.__post_init__">
+<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/data.html#request_list.__post_init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data.request_list.__post_init__" title="Link to this definition">¶</a></dt>
+<dd><p>リクエストデータの整形を行う</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data.request_list.all_data">
+<span class="sig-name descname"><span class="pre">all_data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#data.req_data" title="data.req_data"><span class="pre">req_data</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#data.request_list.all_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">data module</a><ul>
+<li><a class="reference internal" href="#data.DataLoader"><code class="docutils literal notranslate"><span class="pre">DataLoader</span></code></a><ul>
+<li><a class="reference internal" href="#data.DataLoader.file_name"><code class="docutils literal notranslate"><span class="pre">DataLoader.file_name</span></code></a></li>
+<li><a class="reference internal" href="#data.DataLoader.load_data"><code class="docutils literal notranslate"><span class="pre">DataLoader.load_data</span></code></a></li>
+<li><a class="reference internal" href="#data.DataLoader.convert"><code class="docutils literal notranslate"><span class="pre">DataLoader.convert()</span></code></a></li>
+<li><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">DataLoader.convert()</span></code></a></li>
+<li><a class="reference internal" href="#data.DataLoader.load_json"><code class="docutils literal notranslate"><span class="pre">DataLoader.load_json()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data.req_data"><code class="docutils literal notranslate"><span class="pre">req_data</span></code></a><ul>
+<li><a class="reference internal" href="#data.req_data.cloud"><code class="docutils literal notranslate"><span class="pre">req_data.cloud</span></code></a></li>
+<li><a class="reference internal" href="#data.req_data.vrf"><code class="docutils literal notranslate"><span class="pre">req_data.vrf</span></code></a></li>
+<li><a class="reference internal" href="#data.req_data.date"><code class="docutils literal notranslate"><span class="pre">req_data.date</span></code></a></li>
+<li><a class="reference internal" href="#data.req_data.account"><code class="docutils literal notranslate"><span class="pre">req_data.account</span></code></a></li>
+<li><a class="reference internal" href="#data.req_data.prefix"><code class="docutils literal notranslate"><span class="pre">req_data.prefix</span></code></a></li>
+<li><a class="reference internal" href="#data.req_data.dxgw_id"><code class="docutils literal notranslate"><span class="pre">req_data.dxgw_id</span></code></a></li>
+<li><a class="reference internal" href="#data.req_data.dxgw_name"><code class="docutils literal notranslate"><span class="pre">req_data.dxgw_name</span></code></a></li>
+<li><a class="reference internal" href="#data.req_data.vgw_id"><code class="docutils literal notranslate"><span class="pre">req_data.vgw_id</span></code></a></li>
+<li><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">req_data.account</span></code></a></li>
+<li><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">req_data.cloud</span></code></a></li>
+<li><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">req_data.date</span></code></a></li>
+<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">req_data.dxgw_id</span></code></a></li>
+<li><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">req_data.dxgw_name</span></code></a></li>
+<li><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">req_data.prefix</span></code></a></li>
+<li><a class="reference internal" href="#id7"><code class="docutils literal notranslate"><span class="pre">req_data.vgw_id</span></code></a></li>
+<li><a class="reference internal" href="#id8"><code class="docutils literal notranslate"><span class="pre">req_data.vrf</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data.request_list"><code class="docutils literal notranslate"><span class="pre">request_list</span></code></a><ul>
+<li><a class="reference internal" href="#data.request_list.__post_init__"><code class="docutils literal notranslate"><span class="pre">request_list.__post_init__()</span></code></a></li>
+<li><a class="reference internal" href="#data.request_list.all_data"><code class="docutils literal notranslate"><span class="pre">request_list.all_data</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/data.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">aws-attach  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">data module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, hoge.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    </div>
+  </body>
+</html>
