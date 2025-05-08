@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>data &#8212; aws-attach  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
+    
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">aws-attach  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">data</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for data</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ipaddress</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">date</span>
+
+<div class="viewcode-block" id="req_data">
+<a class="viewcode-back" href="../data.html#data.req_data">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">req_data</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;リクエストデータを保持するクラス</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        cloud (str): クラウドプロバイダ名</span>
+<span class="sd">        vrf (str): VRF名</span>
+<span class="sd">        date (str): 日付</span>
+<span class="sd">        account (str): アカウント名</span>
+<span class="sd">        prefix (List[str]): プレフィックスリスト</span>
+<span class="sd">        dxgw_id (str): DXGW ID</span>
+<span class="sd">        dxgw_name (str): DXGW名</span>
+<span class="sd">        vgw_id (str): VGW ID</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cloud</span> <span class="p">:</span>     <span class="nb">str</span>
+    <span class="n">vrf</span> <span class="p">:</span>       <span class="nb">str</span>
+    <span class="n">date</span> <span class="p">:</span>      <span class="nb">str</span>
+    <span class="n">account</span> <span class="p">:</span>   <span class="nb">str</span>
+    <span class="n">prefix</span> <span class="p">:</span>    <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">dxgw_id</span> <span class="p">:</span>   <span class="nb">str</span>
+    <span class="n">dxgw_name</span> <span class="p">:</span> <span class="nb">str</span>
+    <span class="n">vgw_id</span> <span class="p">:</span>    <span class="nb">str</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;リクエストデータの整形を行う</span>
+<span class="sd">        リクエストデータの整形を行い、AWSに関連するデータのみを抽出する</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">### データの整形 ###</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="k">if</span> <span class="n">ipaddress</span><span class="o">.</span><span class="n">ip_network</span><span class="p">(</span><span class="n">item</span><span class="p">)]</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;IPアドレスが無効です。&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># dateのデータフォーマットをYYYY-mm-ddに変換</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid date format&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="request_list">
+<a class="viewcode-back" href="../data.html#data.request_list">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">request_list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;リクエストデータのリストを保持するクラス</span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        all_data (List[req_data]): リクエストデータのリスト</span>
+<span class="sd">    Methods:</span>
+<span class="sd">        __post_init__(): リクエストデータの整形を行う</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">all_data</span> <span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">req_data</span><span class="p">]</span>
+<div class="viewcode-block" id="request_list.__post_init__">
+<a class="viewcode-back" href="../data.html#data.request_list.__post_init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;リクエストデータの整形を行う</span>
+<span class="sd">        リクエストデータの整形を行い、AWSに関連するデータのみを抽出する</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">### データの整形 ###</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_data</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">req_data</span><span class="p">(</span><span class="o">**</span><span class="n">item</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_data</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">req_data</span><span class="p">))</span>
+            <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span>
+                <span class="nb">hasattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">req_data</span><span class="p">)</span> <span class="k">else</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">item</span>
+                <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;cloud&#39;</span><span class="p">,</span> <span class="s1">&#39;vrf&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;account&#39;</span><span class="p">,</span> <span class="s1">&#39;prefix&#39;</span><span class="p">,</span> <span class="s1">&#39;dxgw_id&#39;</span><span class="p">,</span> <span class="s1">&#39;dxgw_name&#39;</span><span class="p">,</span> <span class="s1">&#39;vgw_id&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="ow">and</span> <span class="p">(</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">cloud</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">req_data</span><span class="p">)</span> <span class="k">else</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cloud&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;aws&#39;</span>
+        <span class="p">]</span></div>
+</div>
+
+
+<div class="viewcode-block" id="DataLoader">
+<a class="viewcode-back" href="../data.html#data.DataLoader">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataLoader</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;DataLoaderクラス</span>
+<span class="sd">    JSONファイルからデータを読み込むクラス</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        file_name (str): JSONファイルの名前</span>
+<span class="sd">        load_data (List[req_data]): 読み込んだデータのリスト</span>
+<span class="sd">    Methods:</span>
+<span class="sd">        __init__(file_name: str): DataLoaderの初期化</span>
+<span class="sd">        load_json(file_name: str): JSONファイルからデータを読み込む</span>
+<span class="sd">        convert(data_item): 辞書のキーを特定の形式に変換する(ハイフンをアンダースコアに置換)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;DataLoaderの初期化</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            file_name (str): JSONファイルの名前</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span> <span class="o">=</span> <span class="n">file_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_json</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+<div class="viewcode-block" id="DataLoader.load_json">
+<a class="viewcode-back" href="../data.html#data.DataLoader.load_json">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;JSONファイルからデータを読み込む</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            file_name (str): JSONファイルの名前</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            List[req_data]: 読み込んだデータのリスト</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">req_data</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">item</span><span class="p">))</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">data_list</span></div>
+
+<div class="viewcode-block" id="DataLoader.convert">
+<a class="viewcode-back" href="../data.html#data.DataLoader.convert">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_item</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;辞書のキーを特定の形式に変換する</span>
+<span class="sd">        辞書キーのハイフンをアンダースコアに置換する</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            data_item (dict): 辞書データ</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: 変換後の辞書データ</span>
+<span class="sd">        例:</span>
+<span class="sd">            {&#39;key-name&#39;: &#39;value&#39;} -&gt; {&#39;key_name&#39;: &#39;value&#39;}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mydata</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">):</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data_item</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="k">return</span> <span class="n">mydata</span></div>
+</div>
+
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">aws-attach  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">data</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, hoge.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    </div>
+  </body>
+</html>
